@@ -2,6 +2,7 @@ package com.smael.SpringMySQLJPA.Resource;
 
 import com.smael.SpringMySQLJPA.Entity.Room;
 import com.smael.SpringMySQLJPA.Repository.IRoomRepository;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,7 +23,7 @@ public class RoomResource {
         return iRoomRepository.findAll();
     }
     @GetMapping( value = "/{label}")
-    public List<Room> findByLabel(@PathVariable final String label){
+    public Room findByLabel(@PathVariable final String label){
         return iRoomRepository.findByLabel(label);
     }
 
@@ -30,6 +31,24 @@ public class RoomResource {
     public List<Room> persist(@RequestBody final Room aRoom){
         //System.out.println(">>>>>>>>>>>>> "+aRoom);
         iRoomRepository.save(aRoom);
+        return iRoomRepository.findAll();
+    }
+
+    @RequestMapping (value = "/delete", method = RequestMethod.DELETE)
+    public List<Room> delete(@RequestBody final Room aRoom){
+        //System.out.println(">>>>>>>>>>>>> "+aRoom);
+        Room the_room = iRoomRepository.findByLabel(aRoom.getLabel());
+        iRoomRepository.delete(the_room);
+        return iRoomRepository.findAll();
+    }
+
+    @RequestMapping (value = "/delete", method = RequestMethod.PUT)
+    public List<Room> update(@RequestBody final Room aRoom){
+
+        // Retrieve session from Hibernate, if you are using hibernate
+        Session session = sessionFactory.getCurrentSession();
+        Room the_room = iRoomRepository.findByLabel(aRoom.getLabel());
+        iRoomRepository.delete(the_room);
         return iRoomRepository.findAll();
     }
 }
