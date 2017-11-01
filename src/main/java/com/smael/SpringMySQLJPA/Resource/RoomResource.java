@@ -44,9 +44,6 @@ public class RoomResource {
 
     @RequestMapping (value = "/delete", method = RequestMethod.PUT)
     public List<Room> update(@RequestBody final Room aRoom){
-
-        // Retrieve session from Hibernate, if you are using hibernate
-        Session session = sessionFactory.getCurrentSession();
         Room the_room = iRoomRepository.findByLabel(aRoom.getLabel());
         iRoomRepository.delete(the_room);
         return iRoomRepository.findAll();
