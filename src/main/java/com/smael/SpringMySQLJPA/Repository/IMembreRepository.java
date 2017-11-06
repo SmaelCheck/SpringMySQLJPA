@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface IMembreRepository extends JpaRepository<Membre, Integer>{
-    List<Membre> findByLastname(String lastname);
+    List<Membre> findByLastnameIgnoreCase(String lastname);
 //    void delete (Membre aMembre);
-//    void add(Membre aMembre);
+//      void add(Membre aMembre);
 //    boolean isExist(Membre aMembre);
+//    void save(Membre aMembre);
 }
