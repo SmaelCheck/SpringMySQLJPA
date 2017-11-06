@@ -31,6 +31,9 @@ public class Membre {
     @Column(name="password", nullable = false)
     private String password;
 
+    @Column(name="phone", nullable = false)
+    private String phone;
+
     public Membre() {}
 
     public long getId() {
@@ -83,5 +86,13 @@ public class Membre {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 }
